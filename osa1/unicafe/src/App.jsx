@@ -6,47 +6,63 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const increase = (value, setter) => {
+    setter(value + 1);
+  }
+
   return (
     <div>
       <Header/>
-      <button onClick={() => setGood(good + 1)}>
-        good
-      </button>
-      <button onClick={() => setNeutral(neutral + 1)}>
-        neutral
-      </button>
-      <button onClick={() => setBad(bad + 1)}>
-        bad
-      </button>
+      <Button text={'good'} handleClick={() => increase(good, setGood)}/>
+      <Button text={'neutral'} handleClick={() => increase(neutral, setNeutral)}/>
+      <Button text={'bad'} handleClick={() => increase(bad, setBad)}/>
       <Statistics good={good} neutral={neutral} bad={bad}/>
     </div>
   )
 }
 
-const Statistics = (props) => {
-  return (
+const Button = ({text, handleClick}) => (
+    <button onClick={handleClick}>
+      {text}
+    </button>
+)
+
+const Statistics = ({good, neutral, bad}) => (
     <div>
     <h1>statistics</h1>
     <p>
-      good {props.good}
+      good {good}
     </p>
     <p>
-      neutral {props.neutral}
+      neutral {neutral}
     </p>
     <p>
-      bad {props.bad}
+      bad {bad}
     </p>
+    <div><MoreStatistics good={good} neutral={neutral} bad={bad}/></div>
+    </div>
+)
+
+const MoreStatistics = ({good, neutral, bad}) => {
+  const total = good + neutral + bad
+  let positive = 0
+  let avg = 0
+  if (total !== 0) {
+    avg = (good * 1 + neutral * 0 + bad * -1) / total
+    positive = 100 * good/total
+  }
+  
+  return(
+    <div>
+      <p>all {total}</p>
+      <p>average {avg} (good=1, neutral = 0, bad = -1)</p>
+      <p>positive {positive} %</p>
     </div>
   )
 }
 
-const Header = () => {
-  return (
-  <div>
+const Header = () => (
     <h1>give feedback</h1>
-  </div>
-  )
-  
-}
+)
 
 export default App
