@@ -5,9 +5,11 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [allClicks, setAllClicks] = useState(0)
 
   const increase = (value, setter) => {
     setter(value + 1);
+    setAllClicks(allClicks + 1)
   }
 
   return (
@@ -16,7 +18,7 @@ const App = () => {
       <Button text={'good'} handleClick={() => increase(good, setGood)}/>
       <Button text={'neutral'} handleClick={() => increase(neutral, setNeutral)}/>
       <Button text={'bad'} handleClick={() => increase(bad, setBad)}/>
-      <Statistics good={good} neutral={neutral} bad={bad}/>
+      <Statistics good={good} neutral={neutral} bad={bad} clicks={allClicks}/>
     </div>
   )
 }
@@ -27,21 +29,31 @@ const Button = ({text, handleClick}) => (
     </button>
 )
 
-const Statistics = ({good, neutral, bad}) => (
+const Statistics = ({good, neutral, bad, clicks}) => {
+  if(clicks > 0) {
+    return (
+      <div>
+      <h1>statistics</h1>
+      <p>
+        good {good}
+      </p>
+      <p>
+        neutral {neutral}
+      </p>
+      <p>
+        bad {bad}
+      </p>
+      <MoreStatistics good={good} neutral={neutral} bad={bad}/>
+      </div>
+    )
+  }
+  return(
     <div>
-    <h1>statistics</h1>
-    <p>
-      good {good}
-    </p>
-    <p>
-      neutral {neutral}
-    </p>
-    <p>
-      bad {bad}
-    </p>
-    <div><MoreStatistics good={good} neutral={neutral} bad={bad}/></div>
+      <h1>statistics</h1>
+      <p>no feedback given</p>
     </div>
-)
+  )
+}
 
 const MoreStatistics = ({good, neutral, bad}) => {
   const total = good + neutral + bad
