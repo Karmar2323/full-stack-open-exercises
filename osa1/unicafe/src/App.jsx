@@ -33,15 +33,18 @@ const Statistics = ({good, neutral, bad, clicks}) => {
   if(clicks > 0) {
     const avg = (good - bad) / clicks
     const positive = `${100 * good/clicks} %`
+    const stats = {
+      "good": good,
+      "neutral": neutral,
+      "bad": bad,
+      "all": clicks,
+      "average": avg,
+      "positive": positive
+    }
     return (
       <div>
       <h1>statistics</h1>
-      <StatisticLine text="good" value={good}/>
-      <StatisticLine text="neutral" value={neutral}/>
-      <StatisticLine text="bad" value={bad}/>
-      <StatisticLine text="all" value={clicks}/>
-      <StatisticLine text="average" value={avg}/>
-      <StatisticLine text="positive" value={positive}/>
+      <StatisticTable stats={stats}/>
       </div>
     )
   }
@@ -53,13 +56,41 @@ const Statistics = ({good, neutral, bad, clicks}) => {
   )
 }
 
-const StatisticLine = ({text, value}) => {
+const StatisticTable = (props) => {
+
+  const buildRow = (index, stats) => {
+    const key = Object.keys(stats)[index]
+    return (
+      <tr key={key}>
+        <td>
+          {key} {props.stats[key]}
+        </td>
+      </tr>
+    )
+  }
+
+  const buildRows = (size, stats) => {
+    let rowItem = new Array(size)
+    for (let k = 0; k < size; k++) {
+      rowItem[k] = buildRow(k, stats)
+    }
+    return rowItem
+  }
+
   return (
+    <table>
+      <tbody>
+        {buildRows(Object.keys(props.stats).length, props.stats)}
+      </tbody>
+    </table>
+  )
+}
+
+const StatisticLine = ({text, value}) => (
     <div>
       <p>{text} {value}</p>
     </div>
   )
-}
 
 const Header = () => (
     <h1>give feedback</h1>
