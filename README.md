@@ -18,3 +18,5 @@ Tehtävät [1.1. - 1.2.](https://fullstackopen.com/osa1/reactin_alkeet#tehtavat-
 [1.3. - 1.5](https://fullstackopen.com/osa1/java_scriptia#tehtavat-1-3-1-5).
 - _Unicafe_-palautteenantosovellus, joka näyttää tilastot arvosanojen klikkauksista.
 Tehtävät [1.6. - 1.11.](https://fullstackopen.com/osa1/monimutkaisempi_tila_reactin_debuggaus#tehtavat-1-6-1-14)
+- _Anekdootit_-sovellus, jossa voi arpoa näytettävän anekdootin ja antaa sille äänen. Myös eniten äänestetty juttu näytetään.
+Tehtävät [1.12. - 1.14.](https://fullstackopen.com/osa1/monimutkaisempi_tila_reactin_debuggaus#tehtavat-1-6-1-14)
