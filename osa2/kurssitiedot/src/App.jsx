@@ -71,10 +71,10 @@ const Part = (props) => {
 }
 
 const Total = (props) => {
-  const tasks = props.parts.map(part => part.exercises)
   const initialValue = 0
-  const total = tasks.reduce(
-    (accumulator, currentValue) => accumulator + currentValue, initialValue
+  const total = props.parts.reduce(
+    (accumulator, currentValue) =>
+    accumulator + currentValue.exercises, initialValue
   )
   return(
     <strong>total of {total} exercises</strong>
