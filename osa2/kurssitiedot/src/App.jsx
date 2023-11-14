@@ -1,37 +1,65 @@
 
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    id: 1,
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10,
-        id: 1
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7,
-        id: 2
-      },
-      {
-        name: 'State of a component',
-        exercises: 14,
-        id: 3
-      },
-      {
-        name: 'Redux',
-        exercises: 11,
-        id: 4
-      }
-
-    ]
-  }
+  const courses = [
+    {
+      name: 'Half Stack application development',
+      id: 1,
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4
+        }
+      ]
+    }, 
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
+        }
+      ]
+    }
+  ]
 
   return (
     <div>
-      <Course course={course} />
+      <h1>Web development curriculum</h1>
+      <Courses courses={courses}/>
+    </div>
+  )
+}
+
+const Courses = (props) => {
+  return (
+    <div>    
+      {props.courses.map(course => 
+        <Course key={course.id} course={course}/>
+      )}
     </div>
   )
 }
@@ -39,16 +67,16 @@ const App = () => {
 const Course = (props) => {
   return (
     <div>
-      <Header name={props.course.name}/>
+      <Header2 name={props.course.name}/>
       <Content course={props.course}/>
       <Total parts={props.course.parts}></Total>
     </div>
   )
 }
 
-const Header = (props) => (
+const Header2 = (props) => (
     <div>
-      <h1>{props.name}</h1>
+      <h2>{props.name}</h2>
     </div>
 )
 
