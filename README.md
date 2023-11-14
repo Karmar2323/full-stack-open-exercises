@@ -9,10 +9,9 @@ The commands for the installation of dependencies and running an app are <kbd>np
 
 ## Kurssin harjoitustehtäviä
 Tämän tietovaraston alihakemistoissa on ratkaisujani [Full Stack open](https://fullstackopen.com/) -kurssin tehtäviin.
-Alla on lyhyet kuvaukset tehdyistä sovelluksista ja linkit tehtävänantoihin.
+Alla on lyhyet kuvaukset tehdyistä sovelluksista ja linkit kurssimateriaalin osien tehtävänantoihin.
 
 ### Osa 1: Reactin perusteet
-
 - _Kurssitiedot_-sovellus, joka kertoo kurssin osien tehtävämäärät.
 Tehtävät [1.1. - 1.2.](https://fullstackopen.com/osa1/reactin_alkeet#tehtavat-1-1-1-2) ja
 [1.3. - 1.5](https://fullstackopen.com/osa1/java_scriptia#tehtavat-1-3-1-5).
@@ -20,3 +19,7 @@ Tehtävät [1.1. - 1.2.](https://fullstackopen.com/osa1/reactin_alkeet#tehtavat-
 Tehtävät [1.6. - 1.11.](https://fullstackopen.com/osa1/monimutkaisempi_tila_reactin_debuggaus#tehtavat-1-6-1-14)
 - _Anekdootit_-sovellus, jossa voi arpoa näytettävän anekdootin ja antaa sille äänen. Myös eniten äänestetty juttu näytetään.
 Tehtävät [1.12. - 1.14.](https://fullstackopen.com/osa1/monimutkaisempi_tila_reactin_debuggaus#tehtavat-1-6-1-14)
+
+### Osa 2: Palvelimen kanssa tapahtuva kommunikointi
+- _Kurssitiedot_-sovellus, joka kertoo usean kurssin osat ja tehtävämäärät.
+Tehtävät [2.1. - 2.5.](https://fullstackopen.com/osa2/kokoelmien_renderointi_ja_moduulit#tehtavat-2-1-2-5)
