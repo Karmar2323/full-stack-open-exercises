@@ -1,6 +1,6 @@
 const Person = (props) => (
   <div>
-    <p>{props.contact.name}</p>
+    <p>{props.contact.name} {props.contact.number}</p>
   </div>
 )
 
