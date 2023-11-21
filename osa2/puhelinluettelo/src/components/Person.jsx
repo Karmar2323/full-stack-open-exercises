@@ -1,7 +1,6 @@
-const Person = (props) => (
+const Person = props => (
   <div>
-    <p>{props.contact.name} {props.contact.number}</p>
+    {props.contact.name} {props.contact.number} {props.basicButton}
   </div>
 )
-
 export default Person
