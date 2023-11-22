@@ -20,7 +20,21 @@ const App = () => {
 
   const personsToShow = persons.filter(person =>
     person.name.toLowerCase().includes(newFilter.toLowerCase())
-    )
+  )
+
+  const updateNumber = person => {
+    const id = persons.find(contact => contact.name === person.name).id
+
+    personService
+    .update(id, person)
+    .then(returnedPerson => {
+      console.log('changed id', returnedPerson.id)
+      setPersons(persons.map(contact => contact.id !== id ? contact : returnedPerson))
+      setNewName('')
+      setNewNumber('')
+    })
+    .catch(error => console.log('failed: ', error))
+  }
 
   const addName = event => {
     event.preventDefault()
@@ -30,7 +44,10 @@ const App = () => {
     }
 
     if (persons.map(person => person.name).includes(person.name)) {
-      alert(`${person.name} is already added to phonebook`)
+      if (confirm(`${person.name} is already added to phonebook,
+      replace old number with a new one?`)) {
+        updateNumber(person)
+      }
       return
     }
 
