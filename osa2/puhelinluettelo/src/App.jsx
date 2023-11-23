@@ -3,12 +3,14 @@ import personService from './services/personService'
 import PersonForm from './components/PersonForm'
 import PersonList from './components/PersonList'
 import Filter from './components/Filter'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [noteMessage, setNoteMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -22,13 +24,20 @@ const App = () => {
     person.name.toLowerCase().includes(newFilter.toLowerCase())
   )
 
+  const stopNotification = () => {
+    setTimeout(() => {
+      setNoteMessage(null)
+    }, 4000)
+  }
+
   const updateNumber = person => {
     const id = persons.find(contact => contact.name === person.name).id
 
     personService
     .update(id, person)
     .then(returnedPerson => {
-      console.log('changed id', returnedPerson.id)
+      setNoteMessage(`Updated ${returnedPerson.name}`)
+      stopNotification()
       setPersons(persons.map(contact => contact.id !== id ? contact : returnedPerson))
       setNewName('')
       setNewNumber('')
@@ -54,21 +63,25 @@ const App = () => {
     personService
       .create(person)
       .then(response => {
+        setNoteMessage(`Added ${response.name}`)
+        stopNotification()
         setPersons(persons.concat(response))
         setNewName('')
         setNewNumber('')
       })
   }
 
-  const deleteName = (id) => {
-    console.log('delete clicked', id)
-    if (!window.confirm(`Delete ${persons.filter(p => p.id === id)[0].name}?`)) {
+  const deleteName = id => {
+    const deletedName = persons.filter(p => p.id === id)[0].name
+    if (!window.confirm(`Delete ${deletedName}?`)) {
       return
     }
     else {
       personService
       .deletePerson(id)
       .then(response => {
+        setNoteMessage(`Deleted ${deletedName}`)
+        stopNotification()
         setPersons(persons.filter(p => p.id !== id))
       })
       .catch(error => {
@@ -91,6 +104,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={noteMessage} />
       <Filter filter={newFilter} handleChange={handleFilterChange}/>
       <h3>add a new</h3>
       <PersonForm onSubmit={addName} nameValue={newName} onNameChange={handleNameChange}
