@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
   const [noteMessage, setNoteMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -24,9 +25,9 @@ const App = () => {
     person.name.toLowerCase().includes(newFilter.toLowerCase())
   )
 
-  const stopNotification = () => {
+  const stopNotification = messageSetter => {
     setTimeout(() => {
-      setNoteMessage(null)
+      messageSetter(null)
     }, 4000)
   }
 
@@ -37,12 +38,17 @@ const App = () => {
     .update(id, person)
     .then(returnedPerson => {
       setNoteMessage(`Updated ${returnedPerson.name}`)
-      stopNotification()
+      stopNotification(setNoteMessage)
       setPersons(persons.map(contact => contact.id !== id ? contact : returnedPerson))
       setNewName('')
       setNewNumber('')
     })
-    .catch(error => console.log('failed: ', error))
+    .catch (error => {
+      setErrorMessage(`Information of ${person.name} has already been removed from server`)
+      stopNotification(setErrorMessage)
+      setPersons(persons.filter(p => p.id !== id))
+      console.log('failed: ', error)
+    })
   }
 
   const addName = event => {
@@ -64,7 +70,7 @@ const App = () => {
       .create(person)
       .then(response => {
         setNoteMessage(`Added ${response.name}`)
-        stopNotification()
+        stopNotification(setNoteMessage)
         setPersons(persons.concat(response))
         setNewName('')
         setNewNumber('')
@@ -81,12 +87,13 @@ const App = () => {
       .deletePerson(id)
       .then(response => {
         setNoteMessage(`Deleted ${deletedName}`)
-        stopNotification()
+        stopNotification(setNoteMessage)
         setPersons(persons.filter(p => p.id !== id))
       })
       .catch(error => {
         console.log(error)
-        alert('the contact was already deleted from server')
+        setErrorMessage(`Information of ${deletedName} has already been removed from server`)
+        stopNotification(setErrorMessage)
         setPersons(persons.filter(p => p.id !== id))
       })
     }
@@ -104,7 +111,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={noteMessage} />
+      <Notification message={errorMessage} color={'darkred'} />
+      <Notification message={noteMessage} color={'darkgreen'} />
       <Filter filter={newFilter} handleChange={handleFilterChange}/>
       <h3>add a new</h3>
       <PersonForm onSubmit={addName} nameValue={newName} onNameChange={handleNameChange}
