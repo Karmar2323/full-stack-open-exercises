@@ -18,7 +18,8 @@ const Countries = props => {
     return <div>No{advice}</div>
   }
   if (length <= 10) {
-    return <CountryList names={props.countries} />
+    return <CountryList names={props.countries}
+      showButtonHandler={props.showButtonHandler}/>
   }
   return <div>No{advice}</div>
 }

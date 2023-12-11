@@ -10,7 +10,7 @@ import Country from './components/Country'
 import countryService from './services/countryService'
 
 const App = () => {
-  const [searchedCountry, setCountry] = useState('')
+  const [searchedCountry, setSearchedCountry] = useState('')
   const [countries, setCountries] = useState(null)
   const [resultCountry, setResultCountry] = useState(null)
 
@@ -45,7 +45,7 @@ const App = () => {
   }, [searchedCountry])
 
   const handleFilterChange = event => {
-    setCountry(event.target.value)
+    setSearchedCountry(event.target.value)
   }
 
   const filterCountries = countryList => {
@@ -60,10 +60,14 @@ const App = () => {
   
   const countriesToShow = filterCountries(countries)
 
+  const onShowButton = name => {
+    setSearchedCountry(name)
+  }
+
   return (
     <div>
       <Filter text='find countries' filter={searchedCountry} handleChange={handleFilterChange}/>
-      <Countries countries={countriesToShow ?? []}/>
+      <Countries countries={countriesToShow ?? []} showButtonHandler={onShowButton}/>
       <Country country={resultCountry}/>
     </div>
   )
