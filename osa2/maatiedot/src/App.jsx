@@ -13,6 +13,8 @@ const App = () => {
   const [searchedCountry, setSearchedCountry] = useState('')
   const [countries, setCountries] = useState(null)
   const [resultCountry, setResultCountry] = useState(null)
+  const [capitalWeather, setCapitalWeather] = useState(null)
+  const api_key = import.meta.env.VITE_SOME_KEY || ''
 
   useEffect(() => {
     if(!countries) {
@@ -44,6 +46,20 @@ const App = () => {
     }
   }, [searchedCountry])
 
+  useEffect(() => {
+    if (!countries || !resultCountry || api_key === '')  {
+      console.log("weather unavailable")
+      return
+    }
+    countryService
+      .getWeather(resultCountry["capitalInfo"]["latlng"][0],
+        resultCountry["capitalInfo"]["latlng"][1], api_key)
+      .then(response => {
+        setCapitalWeather(response)
+      })
+      .catch(e => console.log(e))
+  }, [resultCountry])
+
   const handleFilterChange = event => {
     setSearchedCountry(event.target.value)
   }
@@ -67,8 +83,8 @@ const App = () => {
   return (
     <div>
       <Filter text='find countries' filter={searchedCountry} handleChange={handleFilterChange}/>
-      <Countries countries={countriesToShow ?? []} showButtonHandler={onShowButton}/>
-      <Country country={resultCountry}/>
+      <Countries countries={countriesToShow} showButtonHandler={onShowButton}/>
+      <Country country={resultCountry} weather={capitalWeather}/>
     </div>
   )
 }

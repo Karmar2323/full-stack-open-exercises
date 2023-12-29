@@ -1,4 +1,5 @@
 import UnorderedList from './UnorderedList'
+import Weather from './Weather'
 
 const Country = props => {
   if(!props.country) {
@@ -16,6 +17,7 @@ const Country = props => {
     <img src={props.country.flags.png} alt={props.country.flags.alt}
       width="160"
     />
+    <Weather city={props.country["capital"][0]} weather={props.weather}/>
   </div>
   )
 }
