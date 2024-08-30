@@ -7,7 +7,8 @@ The React apps have been created and developed as per [instructions](https://ful
 [Node.js](https://nodejs.org/) is required, and the command used to create a React template is <kbd>npm create vite@latest folder_name -- --template react</kbd>.
 - The commands for the installation of dependencies and running an app are <kbd>npm install</kbd> and <kbd>npm run dev</kbd>.
 - The apps run at http://localhost:5173/.
-- The app _puhelinluettelo_ requires the starting of [JSON Server](https://github.com/typicode/json-server): <kbd> npm run server</kbd>.
+- The app _puhelinluettelo_ in part 2 (osa 2) requires the starting of [JSON Server](https://github.com/typicode/json-server): <kbd> npm run server</kbd>.
+In part 3 (osa 3) JSON Server is not used.
 - The app _maiden tiedot_ optionally shows current weather if a functional API key to [OpenWeather](https://openweathermap.org/) is provided. The key is given as environment variable "VITE_SOME_KEY". For example, if the key is 54l41n3n4v41m34rv0:
     - <kbd>export VITE_SOME_KEY=54l41n3n4v41m34rv0 && npm run dev</kbd> // Linux/macOS Bash
     - <kbd>($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm run dev)</kbd> // Windows PowerShell
@@ -16,6 +17,7 @@ The React apps have been created and developed as per [instructions](https://ful
 
 ## Kurssin harjoitustehtäviä
 Tämän tietovaraston alihakemistoissa on ratkaisujani [Full Stack open](https://fullstackopen.com/) -kurssin tehtäviin.
+Yllä on ohjeita sovellusten suorittamiseen.
 Alla on lyhyet kuvaukset tehdyistä sovelluksista ja linkit kurssimateriaalin osien tehtävänantoihin.
 
 ### Osa 1: Reactin perusteet
@@ -41,3 +43,7 @@ ja [2.16. - 2.17.](https://fullstackopen.com/osa2/tyylien_lisaaminen_react_sovel
 - _Maiden tiedot_ -sovellus, jossa hakukenttään kirjoittamalla saadaan lista maiden nimiä tai yhden maan tiedot osoitteesta https://studies.cs.helsinki.fi/restcountries/.
 Maan pääkaupungin sää näytetään, jos sovellukselle on annettu [OpenWeatherin](https://openweathermap.org/) API-avain ympäristömuuttujana.
 Tehtävät [2.18. - 2.20.](https://fullstackopen.com/osa2/tyylien_lisaaminen_react_sovellukseen#tehtavat-2-18-2-20)
+
+### Osa 3: Palvelimen ohjelmointi NodeJS:n Express-kirjastolla
+_Puhelinluettelo_-sovellus, sovitettuna uuteen [backendiin](https://github.com/Karmar2323/fullstackopen-phonebook-backend). Tehtävä [3.9.](https://fullstackopen.com/osa3/sovellus_internetiin#tehtavat-3-9-3-11)
+
